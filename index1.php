@@ -9,21 +9,15 @@
 </head>
 <body>
     <img class="cmr" src="cmrit.jpg" alt="cmrit">
-    <h1>Welcome to CMRIT Mini Project Portal</h1>
+    <!--<h1>Welcome to CMRIT Mini Project Portal</h1>-->
     <!--<img class="staff" src="staff.png" alt="staff">
     <img class="student" src="student.png" alt="student">
 -->
     <div class="type">
-        <a href="adminlogin.php" style="color: black"> ☛ ADMIN LOGIN ☚ </a> <br><br>
-        <a href="stafflogin.php" style="color: black"> ☛ STAFF LOGIN ☚ </a> <br><br>
-        <a href="student-registration.php" style="color: black"> ☛ TEAM REGISTRATION ☚ </a> <br><br>
-        <a href="index1.php" style="color: black"> ☛ TEAM LOGIN ☚ </a> 
+        <a href="leadlogin.php" style="color: black"> ☛ TEAM LEADER LOGIN ☚ </a> <br><br>
+        <a href="memberlogin.php" style="color: black"> ☛ TEAM MEMBER LOGIN ☚ </a>
     </div>
 
-
-    <div class="admin">
-        © Neha & Sunrose - All rights reserved
-    </div>
     
 </body>
 </html>

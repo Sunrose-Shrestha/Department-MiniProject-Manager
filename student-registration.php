@@ -38,9 +38,7 @@ color:white !important;
 	<h2><a href="logout.php" style="color: black"> 🏠Home </a></h2>
 	<div class="phppot-container">
 		<div class="sign-up-container">
-			<div class="login-signup">
-				<a href="studentlogin.php" style="color:white">Login</a>
-			</div>
+			/*Login link overhere*/
 			<div class="">
 				<form name="sign-up" action="" method="post"
 					onsubmit="return signupValidation()">

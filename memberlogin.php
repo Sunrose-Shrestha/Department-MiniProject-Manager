@@ -2,14 +2,14 @@
 use Phppot\Member;
 
 if (! empty($_POST["login-btn"])) {
-    require_once __DIR__ . '/Model/Member.php';
+    require_once __DIR__ . '/Model/Member1.php';
     $member = new Member();
     $loginResult = $member->loginMember();
 }
 ?>
 <HTML>
 <HEAD>
-<TITLE>STAFF LOGIN</TITLE>
+<TITLE>MEMBER LOGIN</TITLE>
 <link href="assets/css/phppot-style.css" type="text/css"
 	rel="stylesheet" />
 <link href="assets/css/user-registration.css" type="text/css"
@@ -40,23 +40,21 @@ color:white !important;
 	<h3><a href="logout.php" style="color: black"> 🏠Home </a></h3>
 	<div class="phppot-container">
 		<div class="sign-up-container">
-		<div class="login-signup">
-				<!--<a href="staff-registration.php" style="color:white;">Sign up</a>-->
-			</div>
+			/*signup link over here*/
 			<div class="signup-align">
 				<form name="login" action="" method="post"
 					onsubmit="return loginValidation()">
-					<div class="signup-heading"  style="color:white;">Staff Login</div>
+					<div class="signup-heading"  style="color:white;">Member Login</div>
 				<?php if(!empty($loginResult)){?>
 				<div class="error-msg"><?php echo $loginResult;?></div>
 				<?php }?>
 				<div class="row">
 						<div class="inline-block">
 							<div class="form-label">
-								Email<span class="required error" id="email-info"></span>
+								Team-Member Email<span class="required error" id="memberemail-info"></span>
 							</div>
-							<input class="input-box-330" type="email" name="email"
-								id="email">
+							<input class="input-box-330" type="email" name="memberemail"
+								id="memberemail">
 						</div>
 					</div>
 					<div class="row">
@@ -81,26 +79,26 @@ color:white !important;
 	<script>
 function loginValidation() {
 	var valid = true;
-	$("#email").removeClass("error-field");
+	$("#memberemail").removeClass("error-field");
 	$("#password").removeClass("error-field");
 
-	var email = $("#email").val();
+	var memberemail = $("#memberemail").val();
 	var Password = $('#login-password').val();
 
-	$("#email-info").html("").hide();
+	$("#memberemail-info").html("").hide();
 
-	if (email.trim() == "") {
-		$("#email-info").html("Invalid email address.").css("color", "#ee0000").show();
-		$("#email").addClass("error-field");
+	if (memberemail.trim() == "") {
+		$("#memberemail-info").html("Invalid email address.").css("color", "#ee0000").show();
+		$("#memberemail").addClass("error-field");
 		valid = false;
-	} else if (email.trim() == "") {
-		$("#email-info").html("Invalid email address.").css("color", "#ee0000").show();
-		$("#email").addClass("error-field");
+	} else if (memberemail.trim() == "") {
+		$("#memberemail-info").html("Invalid email address.").css("color", "#ee0000").show();
+		$("#memberemail").addClass("error-field");
 		valid = false;
-	} else if (!emailRegex.test(email)) {
-		$("#email-info").html("Invalid email address.").css("color", "#ee0000")
+	} else if (!emailRegex.test(memberemail)) {
+		$("#memberemail-info").html("Invalid email address.").css("color", "#ee0000")
 				.show();
-		$("#email").addClass("error-field");
+		$("#memberemail").addClass("error-field");
 		valid = false;
 	}
 	if (Password.trim() == "") {

@@ -20,7 +20,7 @@ class Member
      */
     public function isLeadnameExists($leadname)
     {
-        $query = 'SELECT * FROM team where leadname = ?';
+        $query = 'SELECT * FROM student where leadname = ?';
         $paramType = 's';
         $paramValue = array(
             $leadname
@@ -40,7 +40,7 @@ class Member
 
     public function isMembernameExists($membername)
     {
-        $query = 'SELECT * FROM team where membername = ?';
+        $query = 'SELECT * FROM student where membername = ?';
         $paramType = 's';
         $paramValue = array(
             $membername
@@ -66,7 +66,7 @@ class Member
      */
     public function isLeadEmailExists($leademail)
     {
-        $query = 'SELECT * FROM team where leademail = ?';
+        $query = 'SELECT * FROM student where leademail = ?';
         $paramType = 's';
         $paramValue = array(
             $leademail
@@ -86,7 +86,7 @@ class Member
 
     public function isMemberEmailExists($memberemail)
     {
-        $query = 'SELECT * FROM team where memberemail = ?';
+        $query = 'SELECT * FROM student where memberemail = ?';
         $paramType = 's';
         $paramValue = array(
             $memberemail
@@ -115,25 +115,25 @@ class Member
         $IsMembernameExists = $this->isMembernameExists($_POST["membername"]);
         $IsLeadEmailExists = $this->isLeadEmailExists($_POST["leademail"]);
         $IsMemberEmailExists = $this->isMemberEmailExists($_POST["memberemail"]);
-        if ($IsLeadnameExists) {
+        if ($IsLeadEmailExists) {
             $response = array(
                 "status" => "error",
-                "message" => "Leadname already exists."
-            );
-        } else if ($IsMembernameExists) {
-            $response = array(
-                "status" => "error",
-                "message" => "Membername already exists."
-            );
-        } else if ($IsLeadEmailExists) {
-            $response = array(
-                "status" => "error",
-                "message" => "Email already exists."
+                "message" => "Leademail already exists."
             );
         } else if ($IsMemberEmailExists) {
             $response = array(
                 "status" => "error",
-                "message" => "Email already exists."
+                "message" => "Memberemail already exists."
+            );
+        } else if ($IsLeadNameExists) {
+            $response = array(
+                "status" => "error",
+                "message" => "Leadname already exists."
+            );
+        } else if ($IsMemberNameExists) {
+            $response = array(
+                "status" => "error",
+                "message" => "Membername already exists."
             );
         }else {
             if (! empty($_POST["signup-password"])) {
@@ -142,17 +142,26 @@ class Member
                 // do not attempt to do your own encryption, it is not safe
                 $hashedPassword = password_hash($_POST["signup-password"], PASSWORD_DEFAULT);
             }
-            $query = 'INSERT INTO team (leadname, membername, leademail, memberemail, password) VALUES (?, ?, ?, ?, ?)';
-            $paramType = 'sssss';
-            $paramValue = array(
+            $query1 = 'INSERT INTO student (leadname, membername, leademail, memberemail, password) VALUES (?, ?, ?, ?, ?)';
+            $paramType1 = 'sssss';
+            $paramValue1 = array(
                 $_POST["leadname"],
                 $_POST["membername"],
                 $_POST["leademail"],
                 $_POST["memberemail"],
                 $hashedPassword 
             );
-            $memberId = $this->ds->insert($query, $paramType, $paramValue);
-            if (! empty($memberId)) {
+            $query2 = 'INSERT INTO team (leadname, membername, leademail, memberemail) VALUES (?, ?, ?, ?)';
+            $paramType2 = 'ssss';
+            $paramValue2 = array(
+                $_POST["leadname"],
+                $_POST["membername"],
+                $_POST["leademail"],
+                $_POST["memberemail"] 
+            );
+            $memberId1 = $this->ds->insert($query1, $paramType1, $paramValue1);
+            $memberId2 = $this->ds->insert($query2, $paramType2, $paramValue2);
+            if (! empty($memberId1)) {
                 $response = array(
                     "status" => "success",
                     "message" => "You have registered successfully."
@@ -162,9 +171,9 @@ class Member
         return $response;
     }
 
-    public function getMember($leademail)
+    public function getLead($leademail)
     {
-        $query = 'SELECT * FROM team where leademail = ?';
+        $query = 'SELECT * FROM student where leademail = ?';
         $paramType = 's';
         $paramValue = array(
             $leademail
@@ -178,9 +187,9 @@ class Member
      *
      * @return string
      */
-    public function loginMember()
+    public function loginLead()
     {
-        $memberRecord = $this->getMember($_POST["leademail"]);
+        $memberRecord = $this->getLead($_POST["leademail"]);
         $loginPassword = 0;
         if (! empty($memberRecord)) {
             if (! empty($_POST["login-password"])) {
@@ -199,6 +208,7 @@ class Member
             // the session
             session_start();
             $_SESSION["leademail"] = $memberRecord[0]["leademail"];
+            $_SESSION["leadname"] = $memberRecord[0]["leadname"];
             session_write_close();
             $url = "./home1.php";
             header("Location: $url");
@@ -207,4 +217,52 @@ class Member
             return $loginStatus;
         }
     }
+
+    public function getMember($memberemail)
+    {
+        $query = 'SELECT * FROM student where memberemail = ?';
+        $paramType = 's';
+        $paramValue = array(
+            $memberemail
+        );
+        $memberRecord = $this->ds->select($query, $paramType, $paramValue);
+        return $memberRecord;
+    }
+
+    /**
+     * to login a user
+     *
+     * @return string
+     */
+    public function loginMember()
+    {
+        $memberRecord = $this->getMember($_POST["memberemail"]);
+        $loginPassword = 0;
+        if (! empty($memberRecord)) {
+            if (! empty($_POST["login-password"])) {
+                $password = $_POST["login-password"];
+            }
+            $hashedPassword = $memberRecord[0]["password"];
+            $loginPassword = 0;
+            if (password_verify($password, $hashedPassword)) {
+                $loginPassword = 1;
+            }
+        } else {
+            $loginPassword = 0;
+        }
+        if ($loginPassword == 1) {
+            // login sucess so store the member's username in
+            // the session
+            session_start();
+            $_SESSION["memberemail"] = $memberRecord[0]["memberemail"];
+            $_SESSION["membername"] = $memberRecord[0]["membername"];
+            session_write_close();
+            $url = "./home2.php";
+            header("Location: $url");
+        } else if ($loginPassword == 0) {
+            $loginStatus = "Invalid email or password.";
+            return $loginStatus;
+        }
+    }
+    
 }

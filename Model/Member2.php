@@ -18,7 +18,7 @@ class Member
      * @param string $username
      * @return boolean
      */
-    public function isUsernameExists($username)
+    /*public function isUsernameExists($username)
     {
         $query = 'SELECT * FROM staff where username = ?';
         $paramType = 's';
@@ -44,7 +44,7 @@ class Member
      * @param string $email
      * @return boolean
      */
-    public function isEmailExists($email)
+    /*public function isEmailExists($email)
     {
         $query = 'SELECT * FROM staff where email = ?';
         $paramType = 's';
@@ -71,7 +71,7 @@ class Member
      *
      * @return string[] registration status message
      */
-    public function registerMember()
+    /*public function registerMember()
     {
         $isUsernameExists = $this->isUsernameExists($_POST["username"]);
         $isEmailExists = $this->isEmailExists($_POST["email"]);
@@ -108,11 +108,11 @@ class Member
             }
         }
         return $response;
-    }
+    }*/
 
     public function getMember($email)
     {
-        $query = 'SELECT * FROM staff where email = ?';
+        $query = 'SELECT * FROM admin where email = ?';
         $paramType = 's';
         $paramValue = array(
             $email
@@ -136,7 +136,7 @@ class Member
             }
             $hashedPassword = $memberRecord[0]["password"];
             $loginPassword = 0;
-            if (password_verify($password, $hashedPassword)) {
+            if ($password == $hashedPassword) {
                 $loginPassword = 1;
             }
         } else {
@@ -149,7 +149,7 @@ class Member
             $_SESSION["email"] = $memberRecord[0]["email"];
             $_SESSION["username"] = $memberRecord[0]["username"];
             session_write_close();
-            $url = "./home.php";
+            $url = "./home3.php";
             header("Location: $url");
         } else if ($loginPassword == 0) {
             $loginStatus = "Invalid username or password.";

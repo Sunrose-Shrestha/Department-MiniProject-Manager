@@ -39,7 +39,7 @@ color:white !important;
 	<div class="phppot-container">
 		<div class="sign-up-container">
 			<div class="login-signup">
-				<a href="stafflogin.php" style="color:white">Login</a>
+				<!--<a href="stafflogin.php" style="color:white">Login</a>-->
 			</div>
 			<div class="">
 				<form name="sign-up" action="" method="post"

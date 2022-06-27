@@ -4,12 +4,12 @@ use Phppot\Member;
 if (! empty($_POST["login-btn"])) {
     require_once __DIR__ . '/Model/Member1.php';
     $member = new Member();
-    $loginResult = $member->loginMember();
+    $loginResult = $member->loginLead();
 }
 ?>
 <HTML>
 <HEAD>
-<TITLE>TEAM LOGIN</TITLE>
+<TITLE>LEAD LOGIN</TITLE>
 <link href="assets/css/phppot-style.css" type="text/css"
 	rel="stylesheet" />
 <link href="assets/css/user-registration.css" type="text/css"
@@ -40,13 +40,11 @@ color:white !important;
 	<h3><a href="logout.php" style="color: black"> 🏠Home </a></h3>
 	<div class="phppot-container">
 		<div class="sign-up-container">
-			<div class="login-signup">
-				<a href="student-registration.php" style="color:white;">Sign up</a>
-			</div>
+			/*signup link over here*/
 			<div class="signup-align">
 				<form name="login" action="" method="post"
 					onsubmit="return loginValidation()">
-					<div class="signup-heading"  style="color:white;">Team Login</div>
+					<div class="signup-heading"  style="color:white;">Lead Login</div>
 				<?php if(!empty($loginResult)){?>
 				<div class="error-msg"><?php echo $loginResult;?></div>
 				<?php }?>

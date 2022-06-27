@@ -26,7 +26,7 @@ class DataSource
 
     const PASSWORD = '';
 
-    const DATABASENAME = 'college';
+    const DATABASENAME = 'dmpm';
 
     private $conn;
 

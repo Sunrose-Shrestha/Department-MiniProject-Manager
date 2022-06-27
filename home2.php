@@ -1,8 +1,7 @@
 <?php
 session_start();
-if (isset($_SESSION["leademail"])) {
-    $leademail = $_SESSION["leademail"];
-    $leadname = $_SESSION["leadname"];
+if (isset($_SESSION["memberemail"])) {
+    $membername = $_SESSION["membername"];
     session_write_close();
 } else {
     // since the username is not set in session, the user is not-logged-in
@@ -42,7 +41,7 @@ if (isset($_SESSION["leademail"])) {
 		</div>
 		<div class="page-content jumbotron" style="  background-color: ##2B65EC;
   background-image: linear-gradient(to bottom, #659EC7, #79BAEC);">
-  <h3 style="color:white; font-weight:bold;">Welcome to CMRIT Student Account >>> <?php echo $leadname;?></h3> <br>
+  <h3 style="color:white; font-weight:bold;">Welcome to CMRIT Student Account >>> <?php echo $membername;?></h3> <br>
   <div>
     <h4 style="color:white; "> Fill the details of your selected mini project<a href="action1.php"> here</a></h4> <br><br> 
   </div>
