@@ -22,7 +22,8 @@
 
 
     <div class="admin">
-        © Neha & Sunrose - All rights reserved
+        © Sreya & Sunrose - All rights reserved
+        
     </div>
     
 </body>

@@ -47,5 +47,8 @@ if (isset($_SESSION["email"])) {
   <div>
     <h4 style="color:white; "> Assign mini project for left out students, <a href="action1.php"> here</a></h4> 
   </div>
+  </div> 
+  <span class="login-signup btn btn-warning"><a href="logout.php" style="color:black">Logout</a></span>
+	</div>
 </BODY>
 </HTML>
