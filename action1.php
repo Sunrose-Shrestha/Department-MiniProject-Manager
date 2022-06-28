@@ -14,34 +14,17 @@
 		<form action="insert1.php" method="post">
 			
 			
+		
 <p>
-				<label for="studentName">Student Name:</label>
-				<input type="text" name="student_name" id="studentName">
-			</p>
-
-
-
-			
-			
-<p>
-				<label for="usn">USN:</label>
-				<input type="text" name="usn" id="usn">
-			</p>
-
-
-
-			
-			
-<p>
-				<label for="projectId">Project Id:</label>
-				<input type="int" name="project_id" id="projectId">
+				<label for="projectid">Project Id:</label>
+				<input type="text" name="projectid" id="projectid">
 			</p>
 
 
 
 			<p>
-				<label for="projectGuide">Project Guide:</label>
-				<input type="int" name="project_guide" id="projectGuide">
+				<label for="guidename">Project Guide:</label>
+				<input type="text" name="guidename" id="guidename">
 			</p>
 
 

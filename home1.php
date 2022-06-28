@@ -49,7 +49,7 @@ if (isset($_SESSION["leademail"])) {
   <?php 
 
 require_once("connection.php");
-$query = " select * from faculty_project ";
+$query = " select * from project ";
 $result = mysqli_query($con,$query);
 
     ?>
@@ -57,29 +57,32 @@ $result = mysqli_query($con,$query);
 <table class="table table-bordered">
 <thead>
         <tr>
-            <th colspan="4">LIST OF MINI PROJECTS ASSIGNED BY FACULTY</th>
+            <th colspan="5">LIST OF MINI PROJECTS ASSIGNED BY FACULTY</th>
         </tr>
     </thead>
                             <tr>
                                 <td> Project ID </td>
                                 <td> Project Description </td>
-                                <td> Faculty Name </td>
                                 <td> Days Required </td>
+                                <td> Guide Name </td>
+                                <td> Guide Email</td>
                             </tr>
 
                             <?php 
-                                    $i=1;
                                     while($row=mysqli_fetch_assoc($result))
                                     {
-                                        $projectDescription = $row['project_description'];
-                                        $facultyName = $row['faculty_name'];
-                                        $daysRequired = $row['days_required'];
+                                        $projectId = $row['projectid'];
+                                        $facultyEmail = $row['guideemail']; 
+                                        $projectDescription = $row['projectdescription'];
+                                        $facultyName = $row['guidename'];
+                                        $daysRequired = $row['workingdays'];
                             ?>
                                     <tr>
-                                        <td><?php echo $i++; ?></td>
+                                        <td><?php echo $projectId ?></td>
                                         <td><?php echo $projectDescription ?></td>
-                                        <td><?php echo $facultyName ?></td>
                                         <td><?php echo $daysRequired ?></td>
+                                        <td><?php echo $facultyName ?></td>
+                                        <td><?php echo $facultyEmail ?></td>
                                     </tr>        
                             <?php 
                                     }  
@@ -89,7 +92,7 @@ $result = mysqli_query($con,$query);
                         </table> <br><br><br>
 
     
-                        <?php   
+                        <?php   /*
 require_once("connection1.php");
 $query = " select * from student_project ";
 $result = mysqli_query($con,$query);
@@ -180,7 +183,7 @@ $result = mysqli_query($con,$query);
                                         
                                     </tr>        
                             <?php 
-                                    }  
+                                    }  */
                             ?>                                                                         
                                    
 

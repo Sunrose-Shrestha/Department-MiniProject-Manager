@@ -13,28 +13,30 @@
 
 		<form action="insert.php" method="post">
 			
-			
-<p>
-				<label for="projectDescription">Project Description:</label>
-				<input type="text" name="project_description" id="projectDescription">
+
+		<p>
+				<label for="projectid">Project ID:</label>
+				<input type="text" name="projectid" id="projectid">
 			</p>
 
 
 
 			
 			
+	
 <p>
-				<label for="facultyName">Faculty Name:</label>
-				<input type="text" name="faculty_name" id="facultyName">
+				<label for="projectdescription">Project Description:</label>
+				<input type="text" name="projectdescription" id="projectdescription">
 			</p>
 
 
 
 			
 			
+			
 <p>
-				<label for="hoursRequired">Days Required:</label>
-				<input type="int" name="days_required" id="daysRequired">
+				<label for="workingdays">Days Required:</label>
+				<input type="int" name="workingdays" id="Workingdays">
 			</p>
 
 

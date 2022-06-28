@@ -19,7 +19,7 @@
 		// username => root
 		// password => empty
 		// database name => staff
-		$conn = mysqli_connect("localhost", "root", "", "college");
+		$conn = mysqli_connect("localhost", "root", "", "dmpm");
 		
 		// Check connection
 		if($conn === false){
@@ -29,8 +29,7 @@
 		
 		// Taking all 5 values from the form data(input)
 		//$student_name = $_REQUEST['student_name'];
-		$usn = $_REQUEST['usn'];
-		$project_id = $_REQUEST['project_id'];
+		$projectid = $_REQUEST['projectid'];
 		//$project_description = $_REQUEST['project_description'];
 		//$project_guide = $_REQUEST['project_guide'];
 		$review1 = $_REQUEST['review1'];
@@ -40,7 +39,7 @@
 
 		// Performing insert query execution
 		// here our table name is project_review
-		$sql = "INSERT INTO project_review VALUES ('$usn','$project_id','$review1', '$review2', '$review3')";
+		$sql = "UPDATE team SET review1='$review1', review2='$review2', review3='$review3' WHERE projectid='$projectid' ";
 		
 		if(mysqli_query($conn, $sql)){
 			echo "<h2>Data stored in a database successfully."
