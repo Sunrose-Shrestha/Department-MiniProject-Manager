@@ -44,49 +44,84 @@ if (isset($_SESSION["leademail"])) {
   background-image: linear-gradient(to bottom, #659EC7, #79BAEC);">
   <h3 style="color:white; font-weight:bold;">Welcome to CMRIT Student Account >>> <?php echo $leadname;?></h3> <br>
   <div>
-    <h4 style="color:white; "> Fill the details of your selected mini project<a href="action1.php"> here</a></h4> <br><br> 
+    <h4 style="color:white; "> Fill the details of your selected mini project, <a href="action1.php"> here</a></h4>  
+  </div>
+  <div>
+    <h4 style="color:white; "> Submit the URL for your report, <a href="action3.php"> here</a></h4> <br><br> 
   </div>
   <?php 
 
 require_once("connection.php");
-$query = " select * from project ";
-$result = mysqli_query($con,$query);
+$query1 = " SELECT * FROM project,student,team WHERE project.projectid=team.projectid and student.leademail=team.leademail and team.leadname='$leadname'";
+/*$query2 = " SELECT * FROM team WHERE leadname='$leadname'";*/
+$result1 = mysqli_query($con,$query1);
+/*$result2 = mysqli_query($con,$query2);*/
 
     ?>
 
 <table class="table table-bordered">
 <thead>
         <tr>
-            <th colspan="5">LIST OF MINI PROJECTS ASSIGNED BY FACULTY</th>
+            <th colspan="9">DETAILS OF MINI PROJECTS SELECTED BY YOU</th>
         </tr>
     </thead>
                             <tr>
                                 <td> Project ID </td>
                                 <td> Project Description </td>
-                                <td> Days Required </td>
-                                <td> Guide Name </td>
-                                <td> Guide Email</td>
+                                <td> Team No </td>
+                                <td> Team Lead</td>
+                                <td> Review 1 </td>
+                                <td> Review 2 </td>
+                                <td> Review 3 </td>
+                                <td> Final </td>
+                                <td> Report</td>
                             </tr>
 
                             <?php 
-                                    while($row=mysqli_fetch_assoc($result))
+                                    while($row=mysqli_fetch_assoc($result1))
                                     {
                                         $projectId = $row['projectid'];
-                                        $facultyEmail = $row['guideemail']; 
+                                        $projectDescription = $row['projectdescription']; 
+                                        $teamNo = $row['teamno'];
+                                        $teamLead = $row['leadname'];
+                                        $review1 = $row['review1'];
+                                        $review2 = $row['review2'];
+                                        $review3 = $row['review3'];
+                                        $total = ($review1+$review2+$review3)/3;
+                                        $report = $row['report'];
+                                        
+                            ?>        
+                            <?php 
+                                    }  
+                             ?>
+                             
+                             <?php 
+                                    /*while($row=mysqli_fetch_assoc($result2))
+                                    {
+                                        $projectId = $row['projectid'];
                                         $projectDescription = $row['projectdescription'];
-                                        $facultyName = $row['guidename'];
-                                        $daysRequired = $row['workingdays'];
+                                        $teamNo = $row['teamno'];
+                                        $teamLead = $row['leadname'];
+                                        $review1 = $row['review1'];
+                                        $review2 = $row['review2'];
+                                        $review3 = $row['review3'];
+                                        $total = ($review1+$review2+$review3)/3;*/
+                                        
                             ?>
                                     <tr>
                                         <td><?php echo $projectId ?></td>
                                         <td><?php echo $projectDescription ?></td>
-                                        <td><?php echo $daysRequired ?></td>
-                                        <td><?php echo $facultyName ?></td>
-                                        <td><?php echo $facultyEmail ?></td>
+                                        <td><?php echo $teamNo ?></td>
+                                        <td><?php echo $teamLead ?></td>
+                                        <td><?php echo $review1 ?></td>
+                                        <td><?php echo $review2 ?></td>
+                                        <td><?php echo $review3 ?></td>
+                                        <td><?php echo $total ?></td>
+                                        <td><a href="<?php echo $report ?>"><?php echo "Team-".$teamNo." Report" ?> </a></td>
                                     </tr>        
                             <?php 
-                                    }  
-                            ?>                                                                    
+                                      
+                             ?>
                                    
 
                         </table> <br><br><br>

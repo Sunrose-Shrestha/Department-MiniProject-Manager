@@ -12,7 +12,7 @@
 </head>
 
 <body>
-<!--<h1><a href="home1.php" style="color: black"> 🏠Dashboard </a></h1>-->
+<h1><a href="home1.php" style="color: black"> 🏠Dashboard </a></h1>
 	<center>
 		<?php
 
@@ -44,13 +44,11 @@
 		}
 		
 		// Taking all 4 values from the form data(input)
-		$projectid = $_REQUEST['projectid'];
-		$guidename = $_REQUEST['guidename'];
-		
+		$report = $_REQUEST['report'];
 		
 		// Performing insert query execution
 		// here our table name is student_project
-		$sql = "UPDATE team SET projectid='$projectid', guidename='$guidename' WHERE leadname='$leadname'";
+		$sql = "UPDATE team SET report='$report' WHERE leadname='$leadname'";
 		
 		if(mysqli_query($conn, $sql)){
 			echo "<h2>Data stored in a database successfully."
