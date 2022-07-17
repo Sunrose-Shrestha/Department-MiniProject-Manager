@@ -44,6 +44,9 @@ if (isset($_SESSION["leademail"])) {
   background-image: linear-gradient(to bottom, #659EC7, #79BAEC);">
   <h3 style="color:white; font-weight:bold;">Welcome to CMRIT Student Account >>> <?php echo $leadname;?></h3> <br>
   <div>
+    <h4 style="color:white; "> List of mini project titles, <a href="home4.php"> here</a></h4>  
+  </div>
+  <div>
     <h4 style="color:white; "> Fill the details of your selected mini project, <a href="action1.php"> here</a></h4>  
   </div>
   <div>
@@ -92,22 +95,10 @@ $result1 = mysqli_query($con,$query1);
                                         
                             ?>        
                             <?php 
-                                    }  
+                                      
                              ?>
                              
-                             <?php 
-                                    /*while($row=mysqli_fetch_assoc($result2))
-                                    {
-                                        $projectId = $row['projectid'];
-                                        $projectDescription = $row['projectdescription'];
-                                        $teamNo = $row['teamno'];
-                                        $teamLead = $row['leadname'];
-                                        $review1 = $row['review1'];
-                                        $review2 = $row['review2'];
-                                        $review3 = $row['review3'];
-                                        $total = ($review1+$review2+$review3)/3;*/
-                                        
-                            ?>
+                             
                                     <tr>
                                         <td><?php echo $projectId ?></td>
                                         <td><?php echo $projectDescription ?></td>
@@ -120,7 +111,7 @@ $result1 = mysqli_query($con,$query1);
                                         <td><a href="<?php echo $report ?>"><?php echo "Team-".$teamNo." Report" ?> </a></td>
                                     </tr>        
                             <?php 
-                                      
+                                    } 
                              ?>
                                    
 

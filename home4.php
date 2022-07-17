@@ -1,19 +1,3 @@
-<?php
-session_start();
-if (isset($_SESSION["memberemail"])) {
-    $membername = $_SESSION["membername"];
-    session_write_close();
-} else {
-    // since the username is not set in session, the user is not-logged-in
-    // he is trying to access this page unauthorized
-    // so let's clear all session variables and redirect him to index
-    session_unset();
-    session_write_close();
-    $url = "./index.php";
-    header("Location: $url");
-}
-
-?>
 <HTML>
 <HEAD>
 <TITLE>Welcome</TITLE>
@@ -32,85 +16,66 @@ if (isset($_SESSION["memberemail"])) {
     }
 </style>
 </HEAD>
-
 <BODY>
-  
-
-	<div class="phppot-container" >
-        <div class="col btn btn-danger" style="margin-top:5% !important;"> Student Dashboard</div><div class="page-header">
+<div class="phppot-container" >
+        <div class="col btn btn-danger" style="margin-top:5% !important;"> Select Mini Project Title From Here</div><div class="page-header">
 		</div>
-		<div class="page-content jumbotron" style="  background-color: ##2B65EC;
+		<div class="page-content jumbotron" style="  background-color: #2B65EC;
   background-image: linear-gradient(to bottom, #659EC7, #79BAEC);">
-  <h3 style="color:white; font-weight:bold;">Welcome to CMRIT Student Account >>> <?php echo $membername;?></h3> <br>
-  <!--<div>
-    <h4 style="color:white; "> Fill the details of your selected mini project<a href="action1.php"> here</a></h4> <br><br> 
-  </div>-->
-  <?php 
+<?php 
 
-require_once("connection.php");
-$query1 = " SELECT * FROM project,student,team WHERE project.projectid=team.projectid and student.leademail=team.leademail and team.membername='$membername'";
-/*$query2 = " SELECT * FROM team WHERE leadname='$leadname'";*/
-$result1 = mysqli_query($con,$query1);
-/*$result2 = mysqli_query($con,$query2);*/
+require_once("connection1.php");
+$query = " SELECT * FROM project";
+$result = mysqli_query($con,$query);
+
 
     ?>
 
 <table class="table table-bordered">
 <thead>
         <tr>
-            <th colspan="9">DETAILS OF MINI PROJECTS SELECTED BY YOUR LEADER</th>
+            <th colspan="5">Mini Project Titles Assigned By Faculties</th>
         </tr>
     </thead>
                             <tr>
                                 <td> Project ID </td>
                                 <td> Project Description </td>
-                                <td> Team No </td>
-                                <td> Team Lead</td>
-                                <td> Review 1 </td>
-                                <td> Review 2 </td>
-                                <td> Review 3 </td>
-                                <td> Final </td>
-                                <td> Report</td>
+                                <td> Working Days </td>
+                                <td> Guide Name</td>
+                                <td> Guide Email </td>
                             </tr>
 
                             <?php 
-                                    while($row=mysqli_fetch_assoc($result1))
+                                    while($row=mysqli_fetch_assoc($result))
                                     {
                                         $projectId = $row['projectid'];
                                         $projectDescription = $row['projectdescription']; 
-                                        $teamNo = $row['teamno'];
-                                        $teamLead = $row['leadname'];
-                                        $review1 = $row['review1'];
-                                        $review2 = $row['review2'];
-                                        $review3 = $row['review3'];
-                                        $total = ($review1+$review2+$review3)/3;
-                                        $report = $row['report'];
+                                        $workingDays = $row['workingdays'];
+                                        $guideName = $row['guidename'];
+                                        $guideEmail = $row['guideemail'];
+                                        
                                         
                             ?>        
                             <?php 
                                       
                              ?>
-                             
                                     <tr>
                                         <td><?php echo $projectId ?></td>
                                         <td><?php echo $projectDescription ?></td>
-                                        <td><?php echo $teamNo ?></td>
-                                        <td><?php echo $teamLead ?></td>
-                                        <td><?php echo $review1 ?></td>
-                                        <td><?php echo $review2 ?></td>
-                                        <td><?php echo $review3 ?></td>
-                                        <td><?php echo $total ?></td>
-                                        <td><a href="<?php echo $report ?>"><?php echo "Team-".$teamNo." Report" ?> </a></td>
+                                        <td><?php echo $workingDays ?></td>
+                                        <td><?php echo $guideName ?></td>
+                                        <td><?php echo $guideEmail ?></td>
+                                        
                                     </tr>        
                             <?php 
-                                    } 
+                                   }   
                              ?>
                                    
 
                         </table> <br><br><br>
 
     
-                        <?php  /* 
+                        <?php   /*
 require_once("connection1.php");
 $query = " select * from student_project ";
 $result = mysqli_query($con,$query);
@@ -222,7 +187,7 @@ $result = mysqli_query($con,$query);
   
   
         </div> 
-  <span class="login-signup btn btn-warning"><a href="logout.php" style="color:black">Logout</a></span>
+  
 	</div>
 </BODY>
 

@@ -52,9 +52,9 @@ if (isset($_SESSION["email"])) {
   <?php 
 
 require_once("connection.php");
-$query1 = " SELECT * FROM project,team,staff WHERE project.projectid=team.projectid and staff.email=project.guideemail and team.guidename='$username'";
+$query = " SELECT * FROM project,team,staff WHERE project.projectid=team.projectid and staff.email=project.guideemail and team.guidename='$username'";
 /*$query2 = " SELECT * FROM team WHERE guidename='$username'";*/
-$result1 = mysqli_query($con,$query1);
+$result = mysqli_query($con,$query);
 /*$result2 = mysqli_query($con,$query2);*/
 
     ?>
@@ -78,7 +78,7 @@ $result1 = mysqli_query($con,$query1);
                             </tr>
 
                             <?php 
-                                    while($row=mysqli_fetch_assoc($result1))
+                                    while($row=mysqli_fetch_assoc($result))
                                     {
                                         $projectId = $row['projectid'];
                                         $projectDescription = $row['projectdescription']; 
@@ -92,20 +92,11 @@ $result1 = mysqli_query($con,$query1);
                                         
                             ?>        
                             <?php 
-                                    }  
+                                      
                              ?>
                              
                              <?php 
-                                    /*while($row=mysqli_fetch_assoc($result2))
-                                    {
-                                        /*$projectId = $row['projectid'];
-                                        $projectDescription = $row['projectdescription'];
-                                        $teamNo = $row['teamno'];
-                                        $teamLead = $row['leadname'];
-                                        $review1 = $row['review1'];
-                                        $review2 = $row['review2'];
-                                        $review3 = $row['review3'];
-                                        $total = ($review1+$review2+$review3)/3;*/
+                                    
                                         
                             ?>
                                     <tr>
@@ -120,7 +111,7 @@ $result1 = mysqli_query($con,$query1);
                                         <td><a href="<?php echo $report ?>"><?php echo "Team-".$teamNo." Report" ?> </a></td>
                                     </tr>        
                             <?php 
-                                      
+                                     } 
                              ?>
                                    
 
